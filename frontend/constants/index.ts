@@ -7,32 +7,32 @@ export const NAV_TITLE = [
 
 export const FEATURES = [
   {
-    title: "Real maps can be offline",
+    title: "Unleash Your Inner Spin Wizard",
     icon: "/map.svg",
     variant: "green",
     description:
-      "We provide a solution for you to be able to use our application when climbing, yes offline maps you can use at any time there is no signal at the location",
+      "Morph into a spin maestro with our slinger's diverse spin capabilities. Replicate real-world opponent play and dominate the table!",
   },
   {
-    title: "Set an adventure schedule",
+    title: "Ball Barrage, Skill Sharpened",
     icon: "/calendar.svg",
     variant: "green",
     description:
-      "Schedule an adventure with friends. On holidays, there are many interesting offers from Hilink. That way, there's no more discussion",
+      "Our multiball training throws a relentless volley of balls, honing your reflexes and reaction time like a seasoned pro.",
   },
   {
-    title: "Technology using augment reality",
+    title: "Level Up Your Reflexes",
     icon: "/tech.svg",
     variant: "green",
     description:
-      "Technology uses augmented reality as a guide to your hiking trail in the forest to the top of the mountain. Already supported by the latest technology without an internet connection",
+      "Enter the ball-blasting zone! Our multiball training feature simulates the pressure of a real match, building lightning-fast reflexes.",
   },
   {
-    title: "Many new locations every month",
+    title: "Smart Training, Smarter You",
     icon: "/location.svg",
     variant: "orange",
     description:
-      "Lots of new locations every month, because we have a worldwide community of climbers who share their best experiences with climbing",
+      "Control your training experience from your smartphone! Effortlessly adjust settings, and program drills, and track your progress for a personalized practice journey.",
   },
 ];
 

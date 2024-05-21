@@ -15,12 +15,11 @@ const Hero = () => {
           alt="camp"
           className="absolute left-[-5px] top-[-30px] w-10 lg:w-[50px]"
         />
-        <h1 className="bold-52 lg:bold-88">TT</h1>
+        <h1 className="bold-52 uppercase lg:bold-88">Playbotics</h1>
         <p className="regular-16 mt-6 text-gray-30 xl:max-w-[520px] ">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis
-          placeat, quaerat, porro et quis saepe odit quam modi similique nisi
-          consequuntur voluptas? Provident, ea ratione quod nam et voluptates
-          esse.
+          Our Table Tennis Trainer personalizes pro-level drills for all, making
+          you a table tennis force without breaking the bank. Train smart, train
+          affordable!
         </p>
 
         <div className="my-4 flex flex-wrap gap-5">
