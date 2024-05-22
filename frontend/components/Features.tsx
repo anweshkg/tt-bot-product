@@ -13,6 +13,7 @@ const Features = () => {
             height={1000}
             alt="feature phone"
             className="feature-phone"
+            // className="translate-x-3 translate-y-4 translate-z-20 rotate-12"
           />
         </div>
 
