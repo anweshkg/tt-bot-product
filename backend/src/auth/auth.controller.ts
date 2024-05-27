@@ -4,6 +4,7 @@ import {
   HttpCode,
   HttpStatus,
   Post,
+  Res,
   UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
@@ -26,7 +27,7 @@ export class AuthController {
   @Public()
   @Post('local/signin')
   @HttpCode(HttpStatus.OK)
-  async signInLocal(@Body() body: AuthDto) {
+  async signInLocal(@Body() body: AuthDto,@Res() res:Response) {
     return this.authService.signInLocal(body);
   }
 
