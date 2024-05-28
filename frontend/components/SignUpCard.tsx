@@ -3,10 +3,26 @@ import React, { useState } from "react";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { cn } from "@/utils/cn";
-import { IconBrandGoogle } from "@tabler/icons-react";
+import { IconBrandGoogle, IconEye, IconEyeOff } from "@tabler/icons-react";
+import { z } from "zod";
+import { useRouter } from "next/navigation";
+
+const signupSchema = z.object({
+  firstname: z.string().min(1, "First name is required"),
+  lastname: z.string().min(1, "Last name is required"),
+  email: z.string().min(1, "Email is required").email("Invalid email address"),
+  gender: z.string().min(1, "Gender is required"),
+  dob: z.string().min(1, "Date of birth is required"),
+  password: z.string().min(1, "Password is required"),
+  confirmPassword: z.string().min(1, "Confirm password is required"),
+});
+
+type SignupFormData = z.infer<typeof signupSchema>;
+
+type Errors = Partial<Record<keyof SignupFormData, string>>;
 
 export function SignupFormDemo() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<SignupFormData>({
     firstname: "",
     lastname: "",
     email: "",
@@ -15,6 +31,20 @@ export function SignupFormDemo() {
     password: "",
     confirmPassword: "",
   });
+
+  const [errors, setErrors] = useState<Errors>({});
+  const [passwordEye, setPasswordEye] = useState(false);
+  const [passwordEyeConfirm, setPasswordEyeConfirm] = useState(false);
+
+  const router = useRouter();
+
+  const passwordVisibility = () => {
+    setPasswordEye((prevPasswordEye) => !prevPasswordEye);
+  };
+
+  const passwordVisibilityConfirm = () => {
+    setPasswordEyeConfirm((prevPasswordEye) => !prevPasswordEye);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -32,33 +62,54 @@ export function SignupFormDemo() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      console.log("Passwords do not match!");
-      return;
+
+    try {
+      signupSchema.parse(formData);
+      let newErrors: Errors = {};
+
+      if (formData.password !== formData.confirmPassword) {
+        newErrors = {
+          ...newErrors,
+          confirmPassword: "Passwords do not match!",
+        };
+        setErrors(newErrors);
+        return;
+      }
+
+      const { confirmPassword, ...dataToSend } = formData;
+      console.log("Form data to be sent:", dataToSend);
+
+      // try {
+      //   const response = await fetch("/api/signup", {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(dataToSend),
+      //   });
+
+      //   if (!response.ok) {
+      //     throw new Error("Network response was not ok");
+      //   }
+
+      //   const result = await response.json();
+      //   console.log("Success:", result);
+      // } catch (error) {
+      //   console.error("Error:", error);
+      // }
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        const newErrors: Errors = {};
+        error.errors.forEach((err) => {
+          if (err.path.length > 0) {
+            newErrors[err.path[0] as keyof SignupFormData] = err.message;
+          }
+        });
+        setErrors(newErrors);
+      } else {
+        console.error("Error:", error);
+      }
     }
-
-    const { confirmPassword, ...dataToSend } = formData; // exclude confirmPassword from the object to be sent
-
-    console.log("Form data to be sent:", dataToSend);
-
-    // try {
-    //   const response = await fetch("/api/signup", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(dataToSend),
-    //   });
-
-    //   if (!response.ok) {
-    //     throw new Error("Network response was not ok");
-    //   }
-
-    //   const result = await response.json();
-    //   console.log("Success:", result);
-    // } catch (error) {
-    //   console.error("Error:", error);
-    // }
   };
 
   return (
@@ -82,6 +133,9 @@ export function SignupFormDemo() {
                 value={formData.firstname}
                 onChange={handleChange}
               />
+              {errors.firstname && (
+                <p className="text-red-500 text-sm">{errors.firstname}</p>
+              )}
             </LabelInputContainer>
             <LabelInputContainer>
               <Label htmlFor="lastname">Last name</Label>
@@ -92,9 +146,13 @@ export function SignupFormDemo() {
                 value={formData.lastname}
                 onChange={handleChange}
               />
+              {errors.lastname && (
+                <p className="text-red-500 text-sm">{errors.lastname}</p>
+              )}
             </LabelInputContainer>
           </div>
-          <LabelInputContainer className="mb-4">
+
+          <LabelInputContainer className="mb-3">
             <Label htmlFor="email">Email Address</Label>
             <Input
               id="email"
@@ -103,14 +161,14 @@ export function SignupFormDemo() {
               value={formData.email}
               onChange={handleChange}
             />
+            {errors.email && (
+              <p className="text-red-500 text-sm">{errors.email}</p>
+            )}
           </LabelInputContainer>
 
-          {/* Gender Selection Buttons */}
           <div className="mb-4">
-            <p className="text-neutral-600 text-sm mb-2 dark:text-neutral-300">
-              Gender
-            </p>
-            <div className="flex space-x-2">
+            <Label htmlFor="gerder">Gender</Label>
+            <div className="flex space-x-2 mt-1">
               <button
                 type="button"
                 className={cn(
@@ -135,41 +193,76 @@ export function SignupFormDemo() {
                 onClick={() => handleGenderChange("female")}
               >
                 Female
-                <BottomGradient />
+                <BottomGradient2 />
               </button>
             </div>
+            {errors.gender && (
+              <p className="text-red-500 text-sm">{errors.gender}</p>
+            )}
           </div>
 
-          {/* Date of Birth Input */}
           <LabelInputContainer className="mb-4">
             <Label htmlFor="dob">Date of Birth</Label>
             <Input
               id="dob"
+              placeholder="enter date here"
               type="date"
               value={formData.dob}
               onChange={handleChange}
             />
+            {errors.dob && <p className="text-red-500 text-sm">{errors.dob}</p>}
           </LabelInputContainer>
 
-          <LabelInputContainer className="mb-4">
+          <LabelInputContainer className="mb-4 relative">
             <Label htmlFor="password">Password</Label>
             <Input
               id="password"
               placeholder="••••••••"
-              type="password"
+              type={passwordEye ? "text" : "password"}
               value={formData.password}
               onChange={handleChange}
             />
+            <button
+              type="button"
+              className="absolute inset-y-9 right-0 px-3 flex items-center"
+              onClick={passwordVisibility}
+            >
+              {passwordEye ? (
+                <IconEye className="text-gray-20" />
+              ) : (
+                <IconEyeOff className="text-gray-20" />
+              )}
+            </button>
+
+            {errors.password && (
+              <p className="text-red-500 text-sm">{errors.password}</p>
+            )}
           </LabelInputContainer>
-          <LabelInputContainer className="mb-8">
+
+          <LabelInputContainer className="mb-8 relative">
             <Label htmlFor="confirmPassword">Confirm Password</Label>
             <Input
               id="confirmPassword"
               placeholder="••••••••"
-              type="password"
+              type={passwordEyeConfirm ? "text" : "password"}
               value={formData.confirmPassword}
               onChange={handleChange}
             />
+            <button
+              type="button"
+              className="absolute inset-y-9 right-0 px-3 flex items-center"
+              onClick={passwordVisibilityConfirm}
+            >
+              {passwordEyeConfirm ? (
+                <IconEye className="text-gray-20" />
+              ) : (
+                <IconEyeOff className="text-gray-20" />
+              )}
+            </button>
+
+            {errors.confirmPassword && (
+              <p className="text-red-500 text-sm">{errors.confirmPassword}</p>
+            )}
           </LabelInputContainer>
 
           <button
@@ -179,6 +272,16 @@ export function SignupFormDemo() {
             Sign up &rarr;
             <BottomGradient />
           </button>
+
+          {/* {Object.keys(errors).length > 0 && (
+            <div className="mt-4 text-red-500">
+              <ul>
+                {Object.values(errors).map((error, index) => (
+                  <li key={index}>{error}</li>
+                ))}
+              </ul>
+            </div>
+          )} */}
 
           <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
 
@@ -200,6 +303,15 @@ export function SignupFormDemo() {
   );
 }
 
+
+const BottomGradient2 = () => {
+  return (
+    <>
+      <span className="group-hover/btn:opacity-100 block transition duration-500 opacity-0 absolute h-px w-full -bottom-px inset-x-0 bg-gradient-to-r from-transparent via-fuchsia-400 to-transparent" />
+      <span className="group-hover/btn:opacity-100 blur-sm block transition duration-500 opacity-0 absolute h-px w-1/2 mx-auto -bottom-px inset-x-10 bg-gradient-to-r from-transparent via-fuchsia-600 to-transparent" />
+    </>
+  );
+};
 const BottomGradient = () => {
   return (
     <>
