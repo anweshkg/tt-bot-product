@@ -114,7 +114,7 @@ export function SignupFormDemo() {
 
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <div className="border-2 max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
+      <div className="shadow-input max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 bg-white dark:bg-black">
         <h2 className="font-bold text-4xl flex justify-center text-neutral-800 dark:text-neutral-200">
           Signup
         </h2>
@@ -302,7 +302,6 @@ export function SignupFormDemo() {
     </div>
   );
 }
-
 
 const BottomGradient2 = () => {
   return (
