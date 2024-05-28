@@ -15,9 +15,11 @@ export default function RootLayout({
 }) {
   return (
     <>
-      <Navbar></Navbar>
       <div className="relative w-full bg-slate-100 dark:bg-slate-950 antialiased">
-        <div className="relative z-10">{children}</div>
+        <div className="relative z-40">
+          <Navbar></Navbar>
+          {children}
+        </div>
         <BackgroundBeams className="" />
       </div>
 

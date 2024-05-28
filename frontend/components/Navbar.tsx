@@ -6,7 +6,7 @@ import Button from "./Button";
 
 const Navbar = () => {
   return (
-    <nav className="flex items-center justify-between pr-10 pl-10 relative z-30 py-5 bg-white dark:bg-gray-900">
+    <nav className="flex items-center justify-between pr-10 pl-10 relative z-30 py-5">
       <Link href={"/"}>
         <Image
           src="/reshot-icon-table-tennis-S3YB87ZK5H.svg"
