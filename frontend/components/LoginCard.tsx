@@ -96,7 +96,7 @@ export function LoginForm() {
           Welcome to our App!
         </p>
         <form className="my-8" onSubmit={handleSubmit}>
-          <LabelInputContainer className="mb-3">
+          <LabelInputContainer className="mb-8">
             <Label htmlFor="email">Email Address</Label>
             <Input
               id="email"
@@ -110,7 +110,7 @@ export function LoginForm() {
             )}
           </LabelInputContainer>
 
-          <LabelInputContainer className="mb-4 relative">
+          <LabelInputContainer className="mb-9 relative">
             <Label htmlFor="password">Password</Label>
             <Input
               id="password"
@@ -141,18 +141,19 @@ export function LoginForm() {
             type="submit"
           >
             Log in &rarr;
+            <BottomGradient />
           </button>
 
           <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
 
           <div className="flex flex-col space-y-4">
             <button
-              className="relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-100 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
+              className="relative group/btn flex space-x-2 items-center justify-center px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-100 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
               type="button"
               onClick={handleGoogleLogin}
             >
               <IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
-              <span className="text-neutral-700 dark:text-neutral-300 text-sm">
+              <span className=" text-neutral-700 dark:text-neutral-300 text-sm">
                 Continue with Google
               </span>
               <BottomGradient />

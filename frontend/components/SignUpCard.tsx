@@ -113,7 +113,7 @@ export function SignupFormDemo() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center pb-11 pt-11">
       <div className="shadow-input max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 bg-white dark:bg-black">
         <h2 className="font-bold text-4xl flex justify-center text-neutral-800 dark:text-neutral-200">
           Signup
@@ -292,7 +292,7 @@ export function SignupFormDemo() {
             >
               <IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
               <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-                Google
+              Continue with Google
               </span>
               <BottomGradient />
             </button>

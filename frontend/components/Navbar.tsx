@@ -6,19 +6,19 @@ import Button from "./Button";
 
 const Navbar = () => {
   return (
-    <nav className=" flexBetween max-container padding-container relative z-30 py-5">
+    <nav className="flex items-center justify-between pr-10 pl-10 relative z-30 py-5 bg-white dark:bg-gray-900">
       <Link href={"/"}>
         <Image
           src="/reshot-icon-table-tennis-S3YB87ZK5H.svg"
-          width={70}
+          width={50}
           height={100}
           alt="Logo"
         />
       </Link>
-      <ul className="hidden h-full gap-12 lg:flex">
+      <ul className="hidden h-full gap-24 lg:flex">
         {NAV_TITLE.map((item) => (
           <Link
-            className="regular-16 text-gray-50 flexCenter cursor-pointer pb-1.5 hover:font-bold transition-all "
+            className="regular-16 text-gray-900 dark:text-gray-10 flexCenter cursor-pointer pb-1.5 hover:font-bold transition-all"
             href={item.href}
             key={item.key}
           >
@@ -41,7 +41,7 @@ const Navbar = () => {
         alt="menu"
         width={24}
         height={24}
-        className="inline-block cursor-pointer lg:hidden"
+        className="inline-block cursor-pointer lg:hidden dark:invert"
       />
     </nav>
   );

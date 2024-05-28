@@ -7,9 +7,24 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{ts,tsx}",
   ],
+  // darkMode: "class",
   theme: {
     extend: {
+      // animation: {
+      //   aurora: "aurora 60s linear infinite",
+      // },
+      // keyframes: {
+      //   aurora: {
+      //     from: {
+      //       backgroundPosition: "50% 50%, 50% 50%",
+      //     },
+      //     to: {
+      //       backgroundPosition: "350% 50%, 350% 50%",
+      //     },
+      //   },
+      // },
       boxShadow: {
         input: `0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08)`,
       },
@@ -41,6 +56,8 @@ module.exports = {
         "feature-bg": "url('/feature-bg.png')",
         pattern: "url('/pattern.png')",
         "pattern-2": "url('/pattern-bg.png')", //bg image
+        "bg-nightsky":"url('/bgSky.png')",
+        "bg-light":"url('/pexels-gdtography-277628-911738.jpg')"
       },
       screens: {
         xs: "400px",
