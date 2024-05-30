@@ -77,26 +77,30 @@ export function SignupFormDemo() {
       }
 
       const { confirmPassword, ...dataToSend } = formData;
+
       console.log("Form data to be sent:", dataToSend);
 
-      // try {
-      //   const response = await fetch("/api/signup", {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify(dataToSend),
-      //   });
+      try {
+        const response = await fetch(
+          "http://localhost:2500/auth/local/signup",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dataToSend),
+          }
+        );
 
-      //   if (!response.ok) {
-      //     throw new Error("Network response was not ok");
-      //   }
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
 
-      //   const result = await response.json();
-      //   console.log("Success:", result);
-      // } catch (error) {
-      //   console.error("Error:", error);
-      // }
+        const result = await response.json();
+        console.log("Success:", result);
+      } catch (error) {
+        console.error("Error:", error);
+      }
     } catch (error) {
       if (error instanceof z.ZodError) {
         const newErrors: Errors = {};
@@ -292,7 +296,7 @@ export function SignupFormDemo() {
             >
               <IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
               <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-              Continue with Google
+                Continue with Google
               </span>
               <BottomGradient />
             </button>

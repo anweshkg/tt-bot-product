@@ -5,6 +5,7 @@ import * as bcrypt from 'bcryptjs';
 import { Tokens } from './types';
 import { JwtService } from '@nestjs/jwt';
 import { IsNull, Not } from 'typeorm';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class AuthService {
@@ -16,10 +17,15 @@ export class AuthService {
 
   async signUpLocal(body: AuthDto): Promise<Tokens> {
     const hash = await this.hash(body.password);
+    const full_name = body.firstname + ' ' + body.lastname;
 
     const newUser = this.userRepository.create({
       emailAddress: body.email,
       passwordHash: hash,
+      fullName: full_name,
+      gender: body.gender,
+      uuid: uuidv4(),
+      dob: body.dob,
     });
     const user = await this.userRepository.save(newUser);
     const tokens = await this.getTokens(user.userId, user.emailAddress);
