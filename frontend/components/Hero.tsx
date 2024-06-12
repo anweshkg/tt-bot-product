@@ -4,7 +4,7 @@ import Button from "./Button";
 
 const Hero = () => {
   return (
-    <section className="max-container padding-container flex flex-col gap-20 py-10 pb-32 md:gap-28 lg:py:20 xl:flex-row ">
+    <section className="max-container padding-container flex flex-col gap-20 py-10 pb-32 mt-[80px] md:gap-28 lg:py:20 xl:flex-row ">
       <div className="hero-map" />
 
       <div className="relative z-20 flex flex-1 flex-col xl:w-1/2">
@@ -60,7 +60,7 @@ const Hero = () => {
         <div className="relative z-20 flex w-[268px] flex-col gap-8 rounded-3xl bg-green-90 px-7 py-8">
           <div className="flex flex-col">
             <div className="flexBetween">
-              <p className="regular-16 text-gray-20">Location</p>
+              <p className="regular-16 text-gray-20">Model</p>
               <Image src={"/close.svg"} alt="close" width={24} height={24} />
             </div>
             <p className="bold-20 text-white">Custom Bot v1</p>
@@ -68,13 +68,37 @@ const Hero = () => {
 
           <div className="flexBetween">
             <div className="flex flex-col">
-              <p className="regular-16 block text-gray-20">Distance</p>
-              <p className="bold-20 text-white">139km</p>
+              <p className="regular-16 block text-gray-20">Top-Spin</p>
+              <p className="bold-20 text-white">3.9m/s</p>
             </div>
 
             <div className="flex flex-col">
-              <p className="regular-16 block text-gray-20">Elevation</p>
-              <p className="bold-20 text-white">2.009km</p>
+              <p className="regular-16 block text-gray-20">Speed</p>
+              <p className="bold-20 text-white">12.9m/s</p>
+            </div>
+          </div>
+
+          <div className="flexBetween">
+            <div className="flex flex-col">
+              <p className="regular-16 block text-gray-20">Angle</p>
+              <p className="bold-20 text-white">-10°</p>
+            </div>
+
+            <div className="flex flex-col">
+              <p className="regular-16 block text-gray-20">Reverse-spin</p>
+              <p className="bold-20 text-white">True</p>
+            </div>
+          </div>
+
+          <div className="flexBetween">
+            <div className="flex flex-col">
+              <p className="regular-16 block text-gray-20">Top-Spin</p>
+              <p className="bold-20 text-white">3.9m/s</p>
+            </div>
+
+            <div className="flex flex-col">
+              <p className="regular-16 block text-gray-20">Speed</p>
+              <p className="bold-20 text-white">12.9m/s</p>
             </div>
           </div>
         </div>
