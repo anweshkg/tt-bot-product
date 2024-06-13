@@ -18,7 +18,10 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <Navbar />
+      <div className=" bg-black">
+        <Navbar lightModeColor="text-gray-10" darkModeColor="text-gray-10" />
+      </div>
+
       <div className="relative overflow-hidden">{children}</div>
       <Footer />
     </>
