@@ -56,8 +56,9 @@ module.exports = {
         "feature-bg": "url('/feature-bg.png')",
         pattern: "url('/pattern.png')",
         "pattern-2": "url('/pattern-bg.png')", //bg image
-        "bg-nightsky":"url('/bgSky.png')",
-        "bg-light":"url('/pexels-gdtography-277628-911738.jpg')"
+        "bg-nightsky": "url('/bgSky.png')",
+        "bg-light": "url('/pexels-gdtography-277628-911738.jpg')",
+        // "hero-gradient": "url('/herobg.png')",
       },
       screens: {
         xs: "400px",
