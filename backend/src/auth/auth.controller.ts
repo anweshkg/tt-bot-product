@@ -8,7 +8,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { AuthDto } from './dto';
+import { AuthDto, LoginDto } from './dto';
 import { Tokens } from './types';
 import { RtGaurd } from 'src/common/gaurds';
 import { GetCurrentUserId, GetReqValue, Public } from 'src/common/decoraters';
@@ -25,16 +25,15 @@ export class AuthController {
   }
 
   @Public()
-  @Post('local/signin')
+  @Post('local/login')
   @HttpCode(HttpStatus.OK)
-  async signInLocal(@Body() body: AuthDto,@Res() res:Response) {
-    return this.authService.signInLocal(body);
+  async logInLocal(@Body() body: LoginDto): Promise<Tokens> {
+    return await this.authService.logInLocal(body);
   }
 
   @Post('logout')
   @HttpCode(HttpStatus.OK)
   async logout(@GetCurrentUserId() userId: number) {
-    // const user = req.user;
     return this.authService.logout(userId);
   }
 

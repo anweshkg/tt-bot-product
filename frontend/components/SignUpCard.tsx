@@ -6,6 +6,9 @@ import { cn } from "@/utils/cn";
 import { IconBrandGoogle, IconEye, IconEyeOff } from "@tabler/icons-react";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_API!;
 
 const signupSchema = z.object({
   firstname: z.string().min(1, "First name is required"),
@@ -81,16 +84,13 @@ export function SignupFormDemo() {
       console.log("Form data to be sent:", dataToSend);
 
       try {
-        const response = await fetch(
-          "http://localhost:2500/auth/local/signup",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(dataToSend),
-          }
-        );
+        const response = await fetch(`${BACKEND_URL}/auth/local/signup`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataToSend),
+        });
 
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -300,6 +300,12 @@ export function SignupFormDemo() {
               </span>
               <BottomGradient />
             </button>
+            <div className="flex justify-center">
+              Already a Member? Log In{" "}
+              <Link className="text-blue-400" href="/login">
+                &nbsp;here
+              </Link>
+            </div>
           </div>
         </form>
       </div>

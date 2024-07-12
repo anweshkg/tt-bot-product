@@ -35,3 +35,12 @@ export class AuthDto {
   @IsDateString()
   dob: string;
 }
+export class LoginDto {
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
+
+  @IsNotEmpty()
+  @IsString() // @IsStrongPassword() use later
+  password: string;
+}

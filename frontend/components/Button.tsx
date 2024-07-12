@@ -7,12 +7,13 @@ type ButtonProps = {
   icon?: string;
   variant: string;
   full?: boolean;
+  href: string;
 };
 
-const Button = ({ type, title, icon, variant, full }: ButtonProps) => {
+const Button = ({ type, title, icon, variant, full, href }: ButtonProps) => {
   return (
     <Link
-      href={"/login"}
+      href={href || "/"}
       className={`flexCenter gap-3 rounded-full border ${variant} ${
         full && "w-full"
       }`}

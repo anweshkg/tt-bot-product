@@ -50,12 +50,14 @@ const Hero = () => {
                 type="button"
                 title="Download App"
                 variant="btn_green"
+                href="/"
               ></Button>
               <Button
                 type="button"
                 title="How We Work "
                 variant="btn_white_text"
                 icon="/play.svg"
+                href="/"
               ></Button>
             </div>
           </div>
