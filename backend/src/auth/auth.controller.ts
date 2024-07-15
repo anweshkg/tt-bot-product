@@ -27,7 +27,7 @@ export class AuthController {
   @Public()
   @Post('local/login')
   @HttpCode(HttpStatus.OK)
-  async logInLocal(@Body() body: LoginDto): Promise<Tokens> {
+  async logInLocal(@Body() body: LoginDto): Promise<any> {
     return await this.authService.logInLocal(body);
   }
 

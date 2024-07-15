@@ -28,7 +28,7 @@ export function LoginForm() {
     password: "",
   });
 
-  const {setUserData} = useUserContext();
+  const context = useUserContext();
 
   const [errors, setErrors] = useState<Errors>({});
   const [passwordEye, setPasswordEye] = useState(false);
@@ -69,11 +69,11 @@ export function LoginForm() {
         }
 
         const result = await response.json();
-        console.log("Success:", result);
-        setUserData(result.user);
-        localStorage.setItem('user', JSON.stringify(result.user));
-        localStorage.setItem('at', result.accesstoken);
-        localStorage.setItem('rt', result.refreshtoken);
+        console.log("Success:", result, context);
+        context.setUserData(result.user);
+        localStorage.setItem("user", JSON.stringify(result.user));
+        localStorage.setItem("at", result.tokens.accesstoken);
+        localStorage.setItem("rt", result.tokens.refreshtoken);
         return router.push("/");
       } catch (error) {
         console.error("Error:", error);

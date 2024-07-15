@@ -52,7 +52,11 @@ export class AuthService {
     const tokens = await this.getTokens(user.userId, user.emailAddress);
     await this.updateRtHashData(user.userId, tokens.refreshtoken);
     console.log('----------', tokens);
-    return tokens;
+    const res = {
+      user: user,
+      tokens,
+    };
+    return res;
   }
 
   async logout(userId: number) {

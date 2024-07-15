@@ -11,7 +11,9 @@ const Navbar = ({
   lightModeColor = "text-gray-900",
   darkModeColor = "dark:text-gray-10",
 }) => {
-  if(localStorage.getItem('user'))
+  // console.log(localStorage.getItem("user"));
+  let user;
+  
 
   return (
     <nav className="flex items-center justify-between pr-10 pl-10 relative z-30 py-5">
@@ -36,15 +38,27 @@ const Navbar = ({
         ))}
       </ul>
 
-      <div className="lg:flexCenter hidden">
-        <Button
-          type="button"
-          title="Login"
-          icon="/user.svg"
-          variant="btn_dark_green"
-          href="/login"
-        />
-      </div>
+      {localStorage.getItem("user") ? (
+        <div className="lg:flexCenter hidden">
+          <Button
+            type="button"
+            title="Anwesh"
+            icon="/user.svg"
+            variant="btn_dark_green"
+            href="/login"
+          />
+        </div>
+      ) : (
+        <div className="lg:flexCenter hidden">
+          <Button
+            type="button"
+            title="Login"
+            icon="/user.svg"
+            variant="btn_dark_green"
+            href="/login"
+          />
+        </div>
+      )}
 
       <Image
         src={"menu.svg"}
