@@ -51,8 +51,6 @@ export function LoginForm() {
 
     try {
       loginSchema.parse(formData);
-
-      // Form validation successful, perform login logic here
       console.log("Form data to be sent:", formData);
 
       try {
@@ -71,9 +69,11 @@ export function LoginForm() {
         const result = await response.json();
         console.log("Success:", result, context);
         context.setUserData(result.user);
-        localStorage.setItem("user", JSON.stringify(result.user));
-        localStorage.setItem("at", result.tokens.accesstoken);
-        localStorage.setItem("rt", result.tokens.refreshtoken);
+        if (typeof window !== "undefined") {
+          localStorage.setItem("user", JSON.stringify(result.user));
+          localStorage.setItem("at", result.tokens.accesstoken);
+          localStorage.setItem("rt", result.tokens.refreshtoken);
+        }
         return router.push("/");
       } catch (error) {
         console.error("Error:", error);
@@ -94,7 +94,6 @@ export function LoginForm() {
   };
 
   const handleGoogleLogin = () => {
-    // Handle Google login logic here
     console.log("Google login clicked");
   };
 
