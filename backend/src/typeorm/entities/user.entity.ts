@@ -22,7 +22,7 @@ export class User {
   emailAddress: string;
 
   @Column({ name: 'password_hash', length: 100 })
-  @IsNotEmpty()
+  // @IsNotEmpty()  //bc of googleauth, fix later
   passwordHash: string;
 
   @Column({ name: 'hashed_rt', nullable: true, length: 100 })

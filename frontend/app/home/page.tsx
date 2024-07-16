@@ -6,8 +6,8 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <Features />
-      <GetApp />
+      {/* <Features /> */}
+      {/* <GetApp /> */}
     </>
   );
 }

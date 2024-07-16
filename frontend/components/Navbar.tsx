@@ -1,18 +1,27 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { NAV_TITLE } from "@/constants";
 import Button from "./Button";
+import { useUserContext } from "@/context/UserContext";
 
 const Navbar = ({
   lightModeColor = "text-gray-900",
   darkModeColor = "dark:text-gray-10",
 }) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    setIsLoggedIn(!!user);
+  }, []);
+
   return (
     <nav className="flex items-center justify-between pr-10 pl-10 relative z-30 py-5">
       <Link href={"/"}>
         <Image
-          // src="/reshot-icon-table-tennis-S3YB87ZK5H.svg"
           src="/logofotfun.png"
           width={150}
           height={100}
@@ -30,16 +39,15 @@ const Navbar = ({
           </Link>
         ))}
       </ul>
-
       <div className="lg:flexCenter hidden">
         <Button
           type="button"
-          title="Login"
+          title={isLoggedIn ? "Anwesh" : "Login"}
           icon="/user.svg"
           variant="btn_dark_green"
+          href="/login"
         />
       </div>
-
       <Image
         src={"menu.svg"}
         alt="menu"

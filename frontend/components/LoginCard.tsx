@@ -7,6 +7,11 @@ import { cn } from "@/utils/cn";
 import { IconEye, IconEyeOff, IconBrandGoogle } from "@tabler/icons-react";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { useUserContext } from "@/context/UserContext";
+
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_API!;
+console.log(BACKEND_URL);
 
 const loginSchema = z.object({
   email: z.string().min(1, "Email is required").email("Invalid email address"),
@@ -22,6 +27,8 @@ export function LoginForm() {
     email: "",
     password: "",
   });
+
+  const context = useUserContext();
 
   const [errors, setErrors] = useState<Errors>({});
   const [passwordEye, setPasswordEye] = useState(false);
@@ -44,28 +51,33 @@ export function LoginForm() {
 
     try {
       loginSchema.parse(formData);
-
-      // Form validation successful, perform login logic here
       console.log("Form data to be sent:", formData);
 
-      // try {
-      //   const response = await fetch("/api/signup", {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify(dataToSend),
-      //   });
+      try {
+        const response = await fetch(`${BACKEND_URL}/auth/local/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
 
-      //   if (!response.ok) {
-      //     throw new Error("Network response was not ok");
-      //   }
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
 
-      //   const result = await response.json();
-      //   console.log("Success:", result);
-      // } catch (error) {
-      //   console.error("Error:", error);
-      // }
+        const result = await response.json();
+        console.log("Success:", result, context);
+        context.setUserData(result.user);
+        if (typeof window !== "undefined") {
+          localStorage.setItem("user", JSON.stringify(result.user));
+          localStorage.setItem("at", result.tokens.accesstoken);
+          localStorage.setItem("rt", result.tokens.refreshtoken);
+        }
+        return router.push("/");
+      } catch (error) {
+        console.error("Error:", error);
+      }
     } catch (error) {
       if (error instanceof z.ZodError) {
         const newErrors: Errors = {};
@@ -82,7 +94,6 @@ export function LoginForm() {
   };
 
   const handleGoogleLogin = () => {
-    // Handle Google login logic here
     console.log("Google login clicked");
   };
 
@@ -158,6 +169,12 @@ export function LoginForm() {
               </span>
               <BottomGradient />
             </button>
+            <div className="flex justify-center">
+              New Member? Sign Up{" "}
+              <Link className="text-blue-400" href="/signup">
+                &nbsp;here
+              </Link>
+            </div>
           </div>
         </form>
       </div>

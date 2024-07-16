@@ -1,5 +1,5 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
-import { AuthDto } from './dto';
+import { AuthDto, LoginDto } from './dto';
 import { UserRepository } from 'src/typeorm/repositories/user.repository';
 import * as bcrypt from 'bcryptjs';
 import { Tokens } from './types';
@@ -33,7 +33,8 @@ export class AuthService {
     return tokens;
   }
 
-  async signInLocal(body: AuthDto) {
+  async logInLocal(body: LoginDto) {
+    console.log('body', body);
     const user = await this.userRepository.findOne({
       where: {
         emailAddress: body.email,
@@ -50,7 +51,12 @@ export class AuthService {
 
     const tokens = await this.getTokens(user.userId, user.emailAddress);
     await this.updateRtHashData(user.userId, tokens.refreshtoken);
-    return tokens;
+    console.log('----------', tokens);
+    const res = {
+      user: user,
+      tokens,
+    };
+    return res;
   }
 
   async logout(userId: number) {
