@@ -9,10 +9,9 @@ async function bootstrap() {
   app.enableCors({
     origin: [
       'http://localhost:2000',
+      'https://www.fotfun.com/',
       process.env.FRONTEND_URL_DOMAIN,
       process.env.FRONTEND_URL_CLOUD,
-      // 'http://localhost:8000',
-      // 'http://localhost:7000',
     ],
     methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
     credentials: true,
