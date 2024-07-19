@@ -19,6 +19,6 @@ async function bootstrap() {
     optionsSuccessStatus: 204,
     maxAge: 86400, // One day
   });
-  await app.listen(2500);
+  await app.listen(process.env.PORT);
 }
 bootstrap();
