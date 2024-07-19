@@ -19,6 +19,11 @@ import { AtGaurd } from './common/gaurds';
       synchronize: true,
       entities: [User],
       logging: true,
+      extra: {
+        ssl: {
+          rejectUnauthorized: false,
+        },
+      },
     }),
     AuthModule,
   ],
